@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "dgSpecHash": "i4SobpYImrzFtevA8Cw2cilt1b9/UnglIlt/FkMgOHyCH8QdmlEmJbXYXyTyHZ5fMzLtHdHQ3al4pDrfGhyDQg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\rodol\\Documents\\RokBot\\RokBot\\RokBot.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rodol\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\2.0.0\\microsoft.extensions.logging.abstractions.2.0.0.nupkg.sha512",
+    "C:\\Users\\rodol\\.nuget\\packages\\microsoft.win32.systemevents\\10.0.1\\microsoft.win32.systemevents.10.0.1.nupkg.sha512",
+    "C:\\Users\\rodol\\.nuget\\packages\\opencvsharp4\\4.11.0.20250507\\opencvsharp4.4.11.0.20250507.nupkg.sha512",
+    "C:\\Users\\rodol\\.nuget\\packages\\opencvsharp4.extensions\\4.11.0.20250507\\opencvsharp4.extensions.4.11.0.20250507.nupkg.sha512",
+    "C:\\Users\\rodol\\.nuget\\packages\\opencvsharp4.runtime.win\\4.11.0.20250507\\opencvsharp4.runtime.win.4.11.0.20250507.nupkg.sha512",
+    "C:\\Users\\rodol\\.nuget\\packages\\sharpadbclient\\2.3.23\\sharpadbclient.2.3.23.nupkg.sha512",
+    "C:\\Users\\rodol\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
+    "C:\\Users\\rodol\\.nuget\\packages\\system.drawing.common\\10.0.1\\system.drawing.common.10.0.1.nupkg.sha512",
+    "C:\\Users\\rodol\\.nuget\\packages\\system.memory\\4.6.3\\system.memory.4.6.3.nupkg.sha512",
+    "C:\\Users\\rodol\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
+    "C:\\Users\\rodol\\.nuget\\packages\\tesseract\\5.2.0\\tesseract.5.2.0.nupkg.sha512"
+  ],
+  "logs": []
+}

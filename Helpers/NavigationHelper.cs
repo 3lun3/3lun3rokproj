@@ -13,6 +13,9 @@ namespace RoKBot.Helpers
             _adb = adb;
         }
 
+
+        
+
         // Returns true if we are definitely inside the City
         public bool IsInCity()
         {

@@ -1,4 +1,5 @@
 using System;
+using System.IO; // Required for saving/loading memory
 using System.Threading;
 using RoKBot.Core;
 using RoKBot.Helpers;
@@ -9,12 +10,23 @@ namespace RoKBot.Modules
     {
         private AdbController _adb;
         private NavigationHelper _nav;
+        
+        // Memory System
         private DateTime _lastRunTime = DateTime.MinValue;
+        private readonly string _configPath = "vip_last_run.txt";
 
         public DailyVipTask(AdbController adb)
         {
             _adb = adb;
             _nav = new NavigationHelper(adb);
+
+            // LOAD MEMORY: Check if we have a file with the last date
+            if (File.Exists(_configPath))
+            {
+                string savedDate = File.ReadAllText(_configPath);
+                // Try to parse the text back into a DateTime object
+                DateTime.TryParse(savedDate, out _lastRunTime);
+            }
         }
 
         public string Name => "Daily VIP Sequence";
@@ -23,8 +35,8 @@ namespace RoKBot.Modules
 
         public bool ShouldRun()
         {
-            // Run every 24h
-            if ((DateTime.Now - _lastRunTime).TotalHours < 24) return false;
+            // If we ran today (same Day and Year), don't run again
+            if (_lastRunTime.Date == DateTime.Today) return false;
             return true;
         }
 
@@ -50,16 +62,19 @@ namespace RoKBot.Modules
                 ClosePopup(); // Handle the reward popup
             }
 
-            // 5. Close VIP Menu (Click VIP Icon again, or use an X if you prefer)
+            // 5. Close VIP Menu (Click VIP Icon again to toggle off)
             Logger.Log("DailyVIP", "Closing VIP Menu...");
-            ClickAndWait("assets/vip_icon.png", "Close VIP"); // Using the icon to toggle it off
+            // We use the icon again because in RoK clicking the VIP icon usually closes the window too.
+            // If this fails, use a specific "close_x.png" or the ClosePopup method.
+            ClickAndWait("assets/vip_icon.png", "Close VIP"); 
 
-            // Success! Update timer.
+            // SUCCESS! SAVE MEMORY:
             _lastRunTime = DateTime.Now;
-            Logger.Log("DailyVIP", "Sequence complete.");
+            File.WriteAllText(_configPath, _lastRunTime.ToString());
+            Logger.Log("DailyVIP", "Sequence complete. Saved to file.");
         }
 
-        // --- Helper Functions for this Task ---
+        // --- Helper Functions ---
 
         // Tries to find an image, click it, and wait. Returns false if not found.
         private bool ClickAndWait(string asset, string stepName)
@@ -88,8 +103,7 @@ namespace RoKBot.Modules
             // ClickAndWait("assets/close_x.png", "Close X");
 
             // OPTION B: Tap a "Safe Spot" (e.g., top center) to dismiss
-            // Rise of Kingdoms usually closes popups if you tap outside.
-            // Let's try tapping coordinates (640, 100) - Top centerish
+            // Rise of Kingdoms usually closes popups if you tap outside the box.
             _adb.Tap(640, 100);
             Thread.Sleep(1500);
         }

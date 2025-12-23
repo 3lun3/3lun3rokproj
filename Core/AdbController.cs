@@ -23,6 +23,14 @@ namespace RoKBot.Core
             _client = new AdbClient();
         }
 
+        public void SendBackKey()
+        {
+            if (_device == null) return;
+            // Keyevent 4 is the standard Android "Back" button
+            _client.ExecuteRemoteCommand("input keyevent 4", _device, null);
+            Console.WriteLine("[Action] Pressed BACK key");
+        }
+
         public bool Connect()
         {
             try

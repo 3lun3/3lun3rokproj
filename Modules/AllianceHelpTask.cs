@@ -13,17 +13,21 @@ namespace RoKBot.Modules
             _adb = adb;
         }
 
+        
+
         public string Name => "Alliance Auto-Help";
         public bool IsEnabled { get; set; } = true;
         
         // Priority 1 = Very High. We want to click this immediately when seen.
         public int Priority => 1; 
 
+        // Add this variable
+        private DateTime _nextCheck = DateTime.MinValue;
+
         public bool ShouldRun()
         {
-            // We can add logic here later (e.g., "Only run if I am in the city")
-            // For now, always watch for it.
-            return true;
+            // Only check for helps every 3 seconds, not every 0.1 seconds
+            return DateTime.Now >= _nextCheck;
         }
 
         public void Run()
@@ -44,6 +48,10 @@ namespace RoKBot.Modules
                 
                 // 4. Wait a tiny bit to let the animation finish
                 System.Threading.Thread.Sleep(1000);
+            }
+            else
+            {
+                _nextCheck = DateTime.Now.AddSeconds(4);
             }
         }
     }
